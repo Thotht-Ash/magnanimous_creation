@@ -2,8 +2,9 @@
 import requests
 import random
 from app_keys import app_id, app_key
-banned_words = ["cancer", 'mutilated', "molested", "cunt", "chink",
-                "miscarriage", "cuck", "cock", "cuckold"]
+banned_words = ["cancer", "child", "childbirth", "chink",  "cock",
+                "confederacy", 'mutilated', "molest", "miscarriage",
+                "miscarry", "midget", "mongrel"]
 
 base_url_m = \
     "https://od-api.oxforddictionaries.com/api/v2/search/thesaurus/en?q=m&" + \
@@ -15,7 +16,7 @@ base_url_c = \
 rm = requests.get(base_url_m, headers={"app_id": app_id, "app_key": app_key})
 rc = requests.get(base_url_c, headers={"app_id": app_id, "app_key": app_key})
 
-word_m = random.choice(rm.json()['results'])['word']
+word_m = random.choice(rm.json()['results'])['word'].to_lower
 while " " in word_m or "-" in word_m or word_m in banned_words:
     word_m = random.choice(rm.json()['results'])['word']
 
